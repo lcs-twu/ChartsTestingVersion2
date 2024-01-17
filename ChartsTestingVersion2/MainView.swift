@@ -17,8 +17,21 @@ private var coffeeSales = [
     (name: "Affogato", count: 50)
 ]
 
+private func findSelectedSector(value: Int) -> String? {
+
+    var accumulatedCount = 0
+
+    let coffee = coffeeSales.first { (_, count) in
+        accumulatedCount += count
+        return value <= accumulatedCount
+    }
+
+    return coffee?.name
+}
+
 struct MainView: View {
     @State private var selectedCount: Int?
+    @State private var selectedSector: String?
     var body: some View {
         //        Chart {
         //            ForEach(coffeeSales, id: \.name) { coffee in
@@ -44,6 +57,7 @@ struct MainView: View {
                     innerRadius: .ratio(0.65),
                     angularInset: 2.0
                 )
+                .opacity(selectedSector == nil ? 1.0 : (selectedSector == coffee.name ? 1.0 : 0.5))
                 .foregroundStyle(by: .value("Type", coffee.name))
                 .cornerRadius(10.0)
                                 .annotation(position: .overlay) {
@@ -57,7 +71,9 @@ struct MainView: View {
         .chartAngleSelection(value: $selectedCount)
         .onChange(of: selectedCount) { oldValue, newValue in
             if let newValue {
-                print(newValue)
+                selectedSector = findSelectedSector(value: newValue)
+            } else {
+                selectedSector = nil
             }
         }
     }
