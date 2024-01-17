@@ -23,7 +23,8 @@ struct MainView: View {
             ForEach(coffeeSales, id: \.name) { coffee in
 
                 SectorMark(
-                    angle: .value("Cup", coffee.count)
+                    angle: .value("Cup", coffee.count),
+                    angularInset: 2.0
                 )
                 .foregroundStyle(by: .value("Type", coffee.name))
             }
