@@ -19,17 +19,39 @@ private var coffeeSales = [
 
 struct MainView: View {
     var body: some View {
+        //        Chart {
+        //            ForEach(coffeeSales, id: \.name) { coffee in
+        //
+        //                SectorMark(
+        //                    angle: .value("Cup", coffee.count),
+        //                    outerRadius: coffee.name == "Latte" ? 150:120,
+        //                    angularInset: 2.0
+        //                )
+        //                .annotation(position: .overlay) {
+        //                    Text("\(coffee.count)")
+        //                        .font(.headline)
+        //                        .foregroundStyle(.white)
+        //                }
+        //                .foregroundStyle(by: .value("Type", coffee.name))
+        //            }
+        //        }
+        //        .frame(height: 500)
         Chart {
             ForEach(coffeeSales, id: \.name) { coffee in
-
                 SectorMark(
                     angle: .value("Cup", coffee.count),
+                    innerRadius: .ratio(0.65),
                     angularInset: 2.0
                 )
                 .foregroundStyle(by: .value("Type", coffee.name))
+                .cornerRadius(10.0)
+                                .annotation(position: .overlay) {
+                                    Text("\(coffee.count)")
+                                        .font(.headline)
+                                        .foregroundStyle(.white)
+                                }
             }
         }
-        .frame(height: 500)
     }
 }
 
