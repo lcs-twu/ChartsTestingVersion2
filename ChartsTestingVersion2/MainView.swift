@@ -54,6 +54,12 @@ struct MainView: View {
             }
         }
         .frame(height: 500)
+        .chartAngleSelection(value: $selectedCount)
+        .onChange(of: selectedCount) { oldValue, newValue in
+            if let newValue {
+                print(newValue)
+            }
+        }
     }
 }
 
