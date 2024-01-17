@@ -18,6 +18,7 @@ private var coffeeSales = [
 ]
 
 struct MainView: View {
+    @State private var selectedCount: Int?
     var body: some View {
         //        Chart {
         //            ForEach(coffeeSales, id: \.name) { coffee in
@@ -52,6 +53,7 @@ struct MainView: View {
                                 }
             }
         }
+        .frame(height: 500)
     }
 }
 
